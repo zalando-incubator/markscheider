@@ -20,7 +20,7 @@ Add metrics-play dependency:
 ```scala
     val appDependencies = Seq(
     ...
-    "com.kenshoo" %% "metrics-play" % "0.1.5"
+    "com.kenshoo" %% "metrics-play" % "0.1.6"
     )
 ```
 
