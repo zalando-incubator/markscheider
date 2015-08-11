@@ -1,0 +1,564 @@
+{
+  "version" : "3.0.0",
+  "gauges" : {
+    "PS-MarkSweep.count" : {
+      "value" : 6
+    },
+    "PS-MarkSweep.time" : {
+      "value" : 581
+    },
+    "PS-Scavenge.count" : {
+      "value" : 20
+    },
+    "PS-Scavenge.time" : {
+      "value" : 605
+    },
+    "blocked.count" : {
+      "value" : 0
+    },
+    "count" : {
+      "value" : 32
+    },
+    "daemon.count" : {
+      "value" : 7
+    },
+    "deadlock.count" : {
+      "value" : 0
+    },
+    "deadlocks" : {
+      "value" : [ ]
+    },
+    "heap.committed" : {
+      "value" : 999817216
+    },
+    "heap.init" : {
+      "value" : 1073741824
+    },
+    "heap.max" : {
+      "value" : 999817216
+    },
+    "heap.usage" : {
+      "value" : 0.18214318085917017
+    },
+    "heap.used" : {
+      "value" : 182109888
+    },
+    "new.count" : {
+      "value" : 0
+    },
+    "non-heap.committed" : {
+      "value" : 230834176
+    },
+    "non-heap.init" : {
+      "value" : 2555904
+    },
+    "non-heap.max" : {
+      "value" : 1476395008
+    },
+    "non-heap.usage" : {
+      "value" : 0.15431387316096912
+    },
+    "non-heap.used" : {
+      "value" : 227828232
+    },
+    "pools.Code-Cache.usage" : {
+      "value" : 0.42365217208862305
+    },
+    "pools.Compressed-Class-Space.usage" : {
+      "value" : 0.022610649466514587
+    },
+    "pools.Metaspace.usage" : {
+      "value" : 0.5464576184749603
+    },
+    "pools.PS-Eden-Space.usage" : {
+      "value" : 0.3866714245171716
+    },
+    "pools.PS-Old-Gen.usage" : {
+      "value" : 0.11113571457423019
+    },
+    "pools.PS-Survivor-Space.usage" : {
+      "value" : 0.29378992197464926
+    },
+    "runnable.count" : {
+      "value" : 10
+    },
+    "terminated.count" : {
+      "value" : 0
+    },
+    "timed_waiting.count" : {
+      "value" : 10
+    },
+    "total.committed" : {
+      "value" : 1230651392
+    },
+    "total.init" : {
+      "value" : 1076297728
+    },
+    "total.max" : {
+      "value" : 2476212224
+    },
+    "total.used" : {
+      "value" : 409939872
+    },
+    "waiting.count" : {
+      "value" : 12
+    }
+  },
+  "counters" : {
+    "org.zalando.markscheider.MetricsFilter.activeRequests" : {
+      "count" : 1
+    }
+  },
+  "histograms" : { },
+  "meters" : {
+    "ch.qos.logback.core.Appender.all" : {
+      "count" : 0,
+      "m15_rate" : 0.0,
+      "m1_rate" : 0.0,
+      "m5_rate" : 0.0,
+      "mean_rate" : 0.0,
+      "units" : "events/second"
+    },
+    "ch.qos.logback.core.Appender.debug" : {
+      "count" : 0,
+      "m15_rate" : 0.0,
+      "m1_rate" : 0.0,
+      "m5_rate" : 0.0,
+      "mean_rate" : 0.0,
+      "units" : "events/second"
+    },
+    "ch.qos.logback.core.Appender.error" : {
+      "count" : 0,
+      "m15_rate" : 0.0,
+      "m1_rate" : 0.0,
+      "m5_rate" : 0.0,
+      "mean_rate" : 0.0,
+      "units" : "events/second"
+    },
+    "ch.qos.logback.core.Appender.info" : {
+      "count" : 0,
+      "m15_rate" : 0.0,
+      "m1_rate" : 0.0,
+      "m5_rate" : 0.0,
+      "mean_rate" : 0.0,
+      "units" : "events/second"
+    },
+    "ch.qos.logback.core.Appender.trace" : {
+      "count" : 0,
+      "m15_rate" : 0.0,
+      "m1_rate" : 0.0,
+      "m5_rate" : 0.0,
+      "mean_rate" : 0.0,
+      "units" : "events/second"
+    },
+    "ch.qos.logback.core.Appender.warn" : {
+      "count" : 0,
+      "m15_rate" : 0.0,
+      "m1_rate" : 0.0,
+      "m5_rate" : 0.0,
+      "mean_rate" : 0.0,
+      "units" : "events/second"
+    }
+  },
+  "timers" : {
+    "org.zalando.markscheider.MetricsFilter.requestTimer" : {
+      "count" : 31,
+      "max" : 276.97211699999997,
+      "mean" : 20.858166859399496,
+      "min" : 3.067201,
+      "p50" : 4.863003,
+      "p75" : 6.931864,
+      "p95" : 108.463121,
+      "p98" : 276.97211699999997,
+      "p99" : 276.97211699999997,
+      "p999" : 276.97211699999997,
+      "stddev" : 51.0918429984659,
+      "m15_rate" : 0.8188610714106542,
+      "m1_rate" : 1.0769633067658748,
+      "m5_rate" : 0.8564156112775173,
+      "mean_rate" : 1.9028556102151575,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.200.GET.controllers.Application.heartbeat" : {
+      "count" : 26,
+      "max" : 97.0,
+      "mean" : 7.1769003048531985,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 7.0,
+      "p98" : 97.0,
+      "p99" : 97.0,
+      "p999" : 97.0,
+      "stddev" : 16.224186027028622,
+      "m15_rate" : 0.22549083783430082,
+      "m1_rate" : 0.5690742718315064,
+      "m5_rate" : 0.27608595098831373,
+      "mean_rate" : 1.6052463271940727,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.200.GET.org.zalando.markscheider.MetricsController.metrics" : {
+      "count" : 3,
+      "max" : 280.0,
+      "mean" : 87.75526816903594,
+      "min" : 9.0,
+      "p50" : 13.0,
+      "p75" : 280.0,
+      "p95" : 280.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 121.48520322859257,
+      "m15_rate" : 0.19779007785878447,
+      "m1_rate" : 0.16929634497812282,
+      "m5_rate" : 0.1934432200964012,
+      "mean_rate" : 0.18733264966744925,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.2xx.ALL.ALL" : {
+      "count" : 29,
+      "max" : 280.0,
+      "mean" : 15.265832915006213,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 97.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 48.00753387007566,
+      "m15_rate" : 0.4232809156930853,
+      "m1_rate" : 0.7383706168096292,
+      "m5_rate" : 0.46952917108471487,
+      "mean_rate" : 1.790844622955392,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.2xx.GET.ALL" : {
+      "count" : 29,
+      "max" : 280.0,
+      "mean" : 15.265832915006209,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 97.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 48.007533870075655,
+      "m15_rate" : 0.4232809156930853,
+      "m1_rate" : 0.7383706168096292,
+      "m5_rate" : 0.46952917108471487,
+      "mean_rate" : 1.7908279420822992,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.2xx.GET.controllers.Application.heartbeat" : {
+      "count" : 26,
+      "max" : 97.0,
+      "mean" : 7.1769003048531985,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 7.0,
+      "p98" : 97.0,
+      "p99" : 97.0,
+      "p999" : 97.0,
+      "stddev" : 16.224186027028622,
+      "m15_rate" : 0.22549083783430082,
+      "m1_rate" : 0.5690742718315064,
+      "m5_rate" : 0.27608595098831373,
+      "mean_rate" : 1.6055526489127847,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.2xx.GET.org.zalando.markscheider.MetricsController.metrics" : {
+      "count" : 3,
+      "max" : 280.0,
+      "mean" : 87.75526816903594,
+      "min" : 9.0,
+      "p50" : 13.0,
+      "p75" : 280.0,
+      "p95" : 280.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 121.48520322859257,
+      "m15_rate" : 0.19779007785878447,
+      "m1_rate" : 0.16929634497812282,
+      "m5_rate" : 0.1934432200964012,
+      "mean_rate" : 0.18732851879482934,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.404.GET.org.zalando.markscheider.MetricsFilter" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.1235668561029999,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.4xx.ALL.ALL" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12356751273985397,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.4xx.GET.ALL" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12356680249437896,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.response.4xx.GET.org.zalando.markscheider.MetricsFilter" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12356603552668884,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.200.GET.controllers.Application.heartbeat" : {
+      "count" : 26,
+      "max" : 97.0,
+      "mean" : 7.1769003048531985,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 7.0,
+      "p98" : 97.0,
+      "p99" : 97.0,
+      "p999" : 97.0,
+      "stddev" : 16.224186027028622,
+      "m15_rate" : 0.22549083783430082,
+      "m1_rate" : 0.5690742718315064,
+      "m5_rate" : 0.27608595098831373,
+      "mean_rate" : 1.6060369095063771,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.200.GET.org.zalando.markscheider.MetricsController.metrics" : {
+      "count" : 3,
+      "max" : 280.0,
+      "mean" : 87.75526816903594,
+      "min" : 9.0,
+      "p50" : 13.0,
+      "p75" : 280.0,
+      "p95" : 280.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 121.48520322859257,
+      "m15_rate" : 0.19779007785878447,
+      "m1_rate" : 0.16929634497812282,
+      "m5_rate" : 0.1934432200964012,
+      "mean_rate" : 0.18732540672651787,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.2xx.ALL.ALL" : {
+      "count" : 29,
+      "max" : 280.0,
+      "mean" : 15.265832915006209,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 97.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 48.007533870075655,
+      "m15_rate" : 0.4232809156930853,
+      "m1_rate" : 0.7383706168096292,
+      "m5_rate" : 0.46952917108471487,
+      "mean_rate" : 1.791341340782276,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.2xx.GET.ALL" : {
+      "count" : 29,
+      "max" : 280.0,
+      "mean" : 15.265832915006209,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 97.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 48.007533870075655,
+      "m15_rate" : 0.4232809156930853,
+      "m1_rate" : 0.7383706168096292,
+      "m5_rate" : 0.46952917108471487,
+      "mean_rate" : 1.791324103159549,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.2xx.GET.controllers.Application.heartbeat" : {
+      "count" : 26,
+      "max" : 97.0,
+      "mean" : 7.1769003048531985,
+      "min" : 3.0,
+      "p50" : 4.0,
+      "p75" : 6.0,
+      "p95" : 7.0,
+      "p98" : 97.0,
+      "p99" : 97.0,
+      "p999" : 97.0,
+      "stddev" : 16.224186027028622,
+      "m15_rate" : 0.22549083783430082,
+      "m1_rate" : 0.5690742718315064,
+      "m5_rate" : 0.27608595098831373,
+      "mean_rate" : 1.6059997487123079,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.2xx.GET.org.zalando.markscheider.MetricsController.metrics" : {
+      "count" : 3,
+      "max" : 280.0,
+      "mean" : 87.75526816903594,
+      "min" : 9.0,
+      "p50" : 13.0,
+      "p75" : 280.0,
+      "p95" : 280.0,
+      "p98" : 280.0,
+      "p99" : 280.0,
+      "p999" : 280.0,
+      "stddev" : 121.48520322859257,
+      "m15_rate" : 0.19779007785878447,
+      "m1_rate" : 0.16929634497812282,
+      "m5_rate" : 0.1934432200964012,
+      "mean_rate" : 0.18732085886936733,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.404.GET.org.zalando.markscheider.MetricsFilter" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12356187632632537,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.4xx.ALL.ALL" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12356204536109563,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.4xx.GET.ALL" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12356103802207585,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    },
+    "zmon.self.response.4xx.GET.org.zalando.markscheider.MetricsFilter" : {
+      "count" : 2,
+      "max" : 117.0,
+      "mean" : 116.5,
+      "min" : 116.0,
+      "p50" : 117.0,
+      "p75" : 117.0,
+      "p95" : 117.0,
+      "p98" : 117.0,
+      "p99" : 117.0,
+      "p999" : 117.0,
+      "stddev" : 0.5,
+      "m15_rate" : 0.39558015571756894,
+      "m1_rate" : 0.33859268995624564,
+      "m5_rate" : 0.3868864401928024,
+      "mean_rate" : 0.12355992153994652,
+      "duration_units" : "milliseconds",
+      "rate_units" : "calls/second"
+    }
+  }
+}

@@ -24,7 +24,7 @@ To enable the plugin, add to `conf/application.conf`:
 Then add a class `Filters` as described in [The Play docs](https://www.playframework.com/documentation/2.5.x/ScalaHttpFilters) to
 include the filter in your filter chain.
 
-```scala
+```tut:silent
 import javax.inject.Inject
 import play.api.http.DefaultHttpFilters
 import org.zalando.markscheider.MetricsFilter
