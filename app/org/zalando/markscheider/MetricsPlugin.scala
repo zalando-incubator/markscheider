@@ -72,7 +72,7 @@ class MetricsPlugin @Inject() (
 
     if (enabled) {
       val rateUnit = configuration.getString("org.zalando.markscheider.rateUnit", validUnits).getOrElse("SECONDS")
-      val durationUnit = configuration.getString("org.zalando.markscheider.durationUnit", validUnits).getOrElse("MILLISECONDS")
+      val durationUnit = configuration.getString("org.zalando.markscheider.durationUnit", validUnits).getOrElse("SECONDS")
       val showSamples = configuration.getBoolean("org.zalando.markscheider.showSamples").getOrElse(false)
 
       setupJvmMetrics(registry)
