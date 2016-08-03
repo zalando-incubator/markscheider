@@ -13,7 +13,7 @@ Add metrics-play dependency in your `build.sbt`:
 
 ```scala
 libraryDependencies += Seq(
-  "org.zalando" %% "markscheider" % "2.5.0-SNAPSHOT"
+  "org.zalando" %% "markscheider" % "2.5.1"
 )
 ```
 
@@ -51,7 +51,6 @@ The basic configuration is supported through the default configuration file, see
 the settings in your `application.conf`. Otherwise the default settings are used.
 
 _Note_: the namespace for the configuration is `org.zalando.markscheider`.
-
 
 ## Credits
 This lib was adapted from https://github.com/fr3akX/metrics-play, which contains code from other sources as well.

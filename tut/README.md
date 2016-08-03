@@ -13,7 +13,7 @@ Add metrics-play dependency in your `build.sbt`:
 
 ```scala
 libraryDependencies += Seq(
-  "org.zalando" %% "markscheider" % "2.5.0-SNAPSHOT"
+  "org.zalando" %% "markscheider" % "2.5.1"
 )
 ```
 
@@ -45,10 +45,12 @@ The metrics are created in a way that is compatible with [ZMON](https://github.c
 After that, you can get metrics information in your service at `/metrics`. By default, that endpoint is unsecured (no authentication in place).
 For an example output of the endpoint, see `example-output.json`.
 
-     
+
 #### Configuration
-Some configuration is supported through the default configuration file. Have a look at `conf/reference.conf`, you can override
-the settings in your `application.conf`. If you do not, these default settings are used.
+The basic configuration is supported through the default configuration file, see `conf/reference.conf`. You can override
+the settings in your `application.conf`. Otherwise the default settings are used.
+
+_Note_: the namespace for the configuration is `org.zalando.markscheider`.
 
 ## Credits
 This lib was adapted from https://github.com/fr3akX/metrics-play, which contains code from other sources as well.
