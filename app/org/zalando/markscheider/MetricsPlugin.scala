@@ -36,7 +36,7 @@ class MetricsPlugin @Inject() (
 
   def onStart(): Any = {
       def setupJvmMetrics(registry: MetricRegistry): Unit = {
-        val jvmMetricsEnabled = configuration.getBoolean("metrics.jvm").getOrElse(true)
+        val jvmMetricsEnabled = configuration.getBoolean("org.zalando.markscheider.jvm").getOrElse(true)
         if (jvmMetricsEnabled) {
           registry.registerAll(new GarbageCollectorMetricSet())
           registry.registerAll(new MemoryUsageGaugeSet())
@@ -45,7 +45,7 @@ class MetricsPlugin @Inject() (
       }
 
       def setupLogbackMetrics(registry: MetricRegistry): Unit = {
-        val logbackEnabled = configuration.getBoolean("metrics.logback").getOrElse(true)
+        val logbackEnabled = configuration.getBoolean("org.zalando.markscheider.logback").getOrElse(true)
         if (logbackEnabled) {
           val appender: InstrumentedAppender = new InstrumentedAppender(registry)
 
