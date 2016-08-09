@@ -40,9 +40,9 @@ publishArtifact in Test := false
 
 pomExtra := (
   <scm>
-    <url>git@github.com:zalando-incubator/hutmann.git</url>
-    <developerConnection>scm:git:git@github.com:zalando-incubator/hutmann.git</developerConnection>
-    <connection>scm:git:https://github.com/zalando-incubator/hutmann.git</connection>
+    <url>git@github.com:zalando-incubator/markscheider.git</url>
+    <developerConnection>scm:git:git@github.com:zalando-incubator/markscheider.git</developerConnection>
+    <connection>scm:git:https://github.com/zalando-incubator/markscheider.git</connection>
   </scm>
     <developers>
       <developer>
@@ -52,7 +52,7 @@ pomExtra := (
       </developer>
     </developers>)
 
-homepage := Some(url("https://github.com/zalando-incubator/hutmann"))
+homepage := Some(url("https://github.com/zalando-incubator/markscheider"))
 
 //settings to compile readme
 tutSettings
