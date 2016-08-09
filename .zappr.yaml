@@ -1,0 +1,15 @@
+approvals:
+  pattern: "^(:\\+1:|👍)" # must start with thumbs up
+  minimum: 2             # at least two approvals from other people necessary
+  ignore: none           # allow pr-opener and last committer to ack PRs
+  from:                  # has to be either one of the following
+    orgs:
+      - zalando
+        zalando-incubator
+  groups:
+    # lenalebt is required approver on every PR
+    seniors:
+      minimum: 1
+      from:
+        users:
+          - lenalebt
