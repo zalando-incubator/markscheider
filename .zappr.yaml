@@ -14,9 +14,5 @@ approvals:
         users:
           - lenalebt
 
-# team should be valid team id in team service https://teams.auth.zalando.com/api/teams/:id
 X-Zalando-Team: "kohle"
-
-# type should be one of [code, doc, config, tools, secrets]
-# code will be the default value, if X-Zalando-Type is not found in .zappr.yml
 X-Zalando-Type: code
