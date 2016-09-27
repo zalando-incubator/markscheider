@@ -12,6 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import play.api._
 import play.api.inject.{ ApplicationLifecycle, Module }
 import javax.inject._
+
+import ch.qos.logback.classic.LoggerContext
+import org.slf4j.LoggerFactory
+
 import scala.concurrent.Future
 import scala.language.implicitConversions
 
@@ -49,10 +53,12 @@ class MetricsPlugin @Inject() (
         if (logbackEnabled) {
           val appender: InstrumentedAppender = new InstrumentedAppender(registry)
 
-          val logger: classic.Logger = Logger.logger.asInstanceOf[classic.Logger]
-          appender.setContext(logger.getLoggerContext)
+          val factory = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
+          val rootLogger = factory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+
+          appender.setContext(rootLogger.getLoggerContext)
           appender.start()
-          logger.addAppender(appender)
+          rootLogger.addAppender(appender)
         }
       }
 
