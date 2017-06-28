@@ -2,14 +2,12 @@ package org.zalando.markscheider
 
 import java.io.StringWriter
 
-import play.api.{ Application, Logger, Play }
-import play.api.mvc.{ Action, AnyContent, Controller, Result }
-import com.codahale.metrics.MetricRegistry
+import play.api.mvc.{ Action, AnyContent, InjectedController, Result }
 import com.fasterxml.jackson.databind.{ ObjectMapper, ObjectWriter }
 import com.google.inject.Inject
 import play.api.http.{ HeaderNames, MimeTypes }
 
-class MetricsController @Inject() (plugin: MetricsPlugin) extends Controller {
+class MetricsController @Inject() (plugin: MetricsPlugin) extends InjectedController {
 
   def serialize(mapper: ObjectMapper): Result = {
     val writer: ObjectWriter = mapper.writerWithDefaultPrettyPrinter()

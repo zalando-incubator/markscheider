@@ -7,7 +7,6 @@ import javax.inject.Inject
 import com.google.common.cache.{ CacheBuilder, CacheLoader, LoadingCache }
 import play.api.Configuration
 import play.api.http.Status
-import play.api.mvc.{ AnyContent, Request }
 
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.concurrent.duration.Duration
@@ -19,8 +18,8 @@ import scala.concurrent.duration._
   */
 class CallTimer @Inject() (registries: MetricRegistries, configuration: Configuration) {
   val registry = registries.getOrCreate
-  val externalHttpPrefix = configuration.getString("org.zalando.markscheider.prefix.external").getOrElse("zmon.external")
-  val externalNonHttpPrefix = configuration.getString("org.zalando.markscheider.prefix.non-http-external").getOrElse("zmon.nonhttp-external")
+  val externalHttpPrefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.external").getOrElse("zmon.external")
+  val externalNonHttpPrefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.non-http-external").getOrElse("zmon.nonhttp-external")
 
   //does not compile with scala.Long oO. Why?
   private val cache: LoadingCache[java.lang.Long, AtomicLong] = CacheBuilder.newBuilder()
@@ -49,10 +48,9 @@ class CallTimer @Inject() (registries: MetricRegistries, configuration: Configur
     responseCodeFunction: T => Int     = { data: T => Status.OK }
   )(call: Future[T])(implicit executionContext: ExecutionContext): Future[T] = {
     val startTime = System.currentTimeMillis()
-    call.onFailure{ //at least, now failures are being recorded somewhere.
-      case ex: Throwable =>
-        val duration = System.currentTimeMillis() - startTime
-        recordExternalNonHttpCall(requestId, duration.milliseconds, name, httpMethod, "FAILED")
+    call.failed.foreach { _ => //at least, now failures are being recorded somewhere.
+      val duration = System.currentTimeMillis() - startTime
+      recordExternalNonHttpCall(requestId, duration.milliseconds, name, httpMethod, "FAILED")
     }
     call.map{ data =>
       val duration = System.currentTimeMillis() - startTime
@@ -107,10 +105,10 @@ class CallTimer @Inject() (registries: MetricRegistries, configuration: Configur
     responseCodeFunction: T => String  = { data: T => "OK" }
   )(call: Future[T])(implicit executionContext: ExecutionContext): Future[T] = {
     val startTime = System.currentTimeMillis()
-    call.onFailure{ //at least, now failures are being recorded somewhere.
-      case ex: Throwable =>
-        val duration = System.currentTimeMillis() - startTime
-        recordExternalNonHttpCall(requestId, duration.milliseconds, name, method, "FAILED")
+    call.failed.foreach { _ => //at least, now failures are being recorded somewhere.
+
+      val duration = System.currentTimeMillis() - startTime
+      recordExternalNonHttpCall(requestId, duration.milliseconds, name, method, "FAILED")
     }
     call.map{ data =>
       val duration = System.currentTimeMillis() - startTime

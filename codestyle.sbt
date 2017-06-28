@@ -17,11 +17,9 @@ scalastyleConfigUrl := Option(url("https://s3.eu-central-1.amazonaws.com/kohle-d
 scalastyleFailOnError := true
 
 // Create a default Scala style task to run with tests
-lazy val compileScalastyle = taskKey[Unit]("compileScalastyle")
+lazy val compileScalastyle = org.scalastyle.sbt.ScalastylePlugin.scalastyle.in(Compile).toTask("")
 
-compileScalastyle := org.scalastyle.sbt.ScalastylePlugin.scalastyle.in(Compile).toTask("").value
-
-(compileInputs in(Compile, compile)) <<= (compileInputs in(Compile, compile)) dependsOn compileScalastyle
+(compileInputs in(Compile, compile)) := ((compileInputs in(Compile, compile)) dependsOn compileScalastyle).value
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
@@ -40,7 +38,7 @@ ScalariformKeys.preferences := ScalariformKeys.preferences.value
   .setPreference(IndentWithTabs, false)
   .setPreference(IndentSpaces, 2)
   .setPreference(MultilineScaladocCommentsStartOnFirstLine, false)
-  .setPreference(PreserveDanglingCloseParenthesis, true)
+  .setPreference(DanglingCloseParenthesis, Force)
 
 coverageEnabled in Test:= true
 coverageExcludedPackages := "<empty>;router.Routes;router.RoutesPrefix;controllers.Reverse*;controllers.javascript.Reverse*"
@@ -49,12 +47,12 @@ coverageMinimum := 50
 //do not warn in test cases when we use reflective calls - but do so in production!
 scalacOptions in Test += "-language:reflectiveCalls"
 
-scapegoatVersion := "1.2.0"
+scapegoatVersion := "1.3.1"
 scapegoatDisabledInspections := Seq(
   "ObjectNames",
   "ClassNames"
 )
 scapegoatIgnoredFiles := Seq(".*/routes/main/.*")
 
-publish <<= publish dependsOn scapegoat
-publishLocal <<= publishLocal dependsOn scapegoat
+publish := (publish dependsOn scapegoat).value
+publishLocal := (publishLocal dependsOn scapegoat).value
