@@ -59,8 +59,5 @@ _Note_: the namespace for the configuration is `org.zalando.markscheider`.
 ## Credits
 This lib was adapted from https://github.com/fr3akX/metrics-play, which contains code from other sources as well.
 
-## Contact
-Feel free to drop me a line at lena.brueder@zalando.de.
-
 ## License
 This code is released under the Apache Public License 2.0.
