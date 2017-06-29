@@ -5,14 +5,22 @@ import java.util.concurrent.TimeUnit
 import com.codahale.metrics.MetricRegistry.name
 import com.codahale.metrics._
 import com.google.inject.Inject
-import play.api.{ Configuration, Logger }
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.Configuration
 import play.api.mvc._
+import play.api.routing.Router
 
-class MetricsFilter @Inject() (registries: MetricRegistries, callTimer: CallTimer, configuration: Configuration) extends EssentialFilter {
+import scala.concurrent.ExecutionContext
+
+class MetricsFilter @Inject() (
+  registries:    MetricRegistries,
+  callTimer:     CallTimer,
+  configuration: Configuration
+)(implicit ec: ExecutionContext)
+    extends EssentialFilter {
+
   val registry = registries.getOrCreate
-  val prefix = configuration.getString("org.zalando.markscheider.prefix.http").getOrElse("zmon.response")
-  val selfPrefix = configuration.getString("org.zalando.markscheider.prefix.self-http").getOrElse("zmon.self.response")
+  val prefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.http").getOrElse("zmon.response")
+  val selfPrefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.self-http").getOrElse("zmon.self.response")
 
   def requestsTimer: Timer = registry.timer(name(classOf[MetricsFilter], "requestTimer"))
   def activeRequests: Counter = registry.counter(name(classOf[MetricsFilter], "activeRequests"))
@@ -21,8 +29,8 @@ class MetricsFilter @Inject() (registries: MetricRegistries, callTimer: CallTime
 
     def apply(rh: RequestHeader) = {
       val startTime = System.currentTimeMillis()
-      val method = rh.tags.getOrElse(play.api.routing.Router.Tags.RouteActionMethod, "MetricsFilter")
-      val controller = rh.tags.getOrElse(play.api.routing.Router.Tags.RouteController, getClass.getPackage.getName)
+      val method = rh.attrs.get(Router.Attrs.HandlerDef).map(_.method).getOrElse("MetricsFilter")
+      val controller = rh.attrs.get(Router.Attrs.HandlerDef).map(_.controller).getOrElse(getClass.getPackage.getName)
 
       val globalCtx = requestsTimer.time()
 

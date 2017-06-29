@@ -3,7 +3,6 @@ package org.zalando.markscheider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-import ch.qos.logback.classic
 import com.codahale.metrics.json.MetricsModule
 import com.codahale.metrics.jvm.{ GarbageCollectorMetricSet, MemoryUsageGaugeSet, ThreadStatesGaugeSet }
 import com.codahale.metrics.logback.InstrumentedAppender
@@ -27,7 +26,7 @@ class MetricsPlugin @Inject() (
     stopper:       RegistryStopper
 ) {
 
-  val validUnits = Some(Set("NANOSECONDS", "MICROSECONDS", "MILLISECONDS", "SECONDS", "MINUTES", "HOURS", "DAYS"))
+  val validUnits = Set("NANOSECONDS", "MICROSECONDS", "MILLISECONDS", "SECONDS", "MINUTES", "HOURS", "DAYS")
 
   val mapper: ObjectMapper = new ObjectMapper()
 
@@ -40,7 +39,7 @@ class MetricsPlugin @Inject() (
 
   def onStart(): Any = {
       def setupJvmMetrics(registry: MetricRegistry): Unit = {
-        val jvmMetricsEnabled = configuration.getBoolean("org.zalando.markscheider.jvm").getOrElse(true)
+        val jvmMetricsEnabled = configuration.getOptional[Boolean]("org.zalando.markscheider.jvm").getOrElse(true)
         if (jvmMetricsEnabled) {
           registry.registerAll(new GarbageCollectorMetricSet())
           registry.registerAll(new MemoryUsageGaugeSet())
@@ -49,7 +48,7 @@ class MetricsPlugin @Inject() (
       }
 
       def setupLogbackMetrics(registry: MetricRegistry): Unit = {
-        val logbackEnabled = configuration.getBoolean("org.zalando.markscheider.logback").getOrElse(true)
+        val logbackEnabled = configuration.getOptional[Boolean]("org.zalando.markscheider.logback").getOrElse(true)
         if (logbackEnabled) {
           val appender: InstrumentedAppender = new InstrumentedAppender(registry)
 
@@ -68,38 +67,38 @@ class MetricsPlugin @Inject() (
           "csv" -> Reporter.csv _
         ).foreach {
             case (name, fun) =>
-              conf.getConfig(name).foreach {
+              conf.getOptional[Configuration](name).foreach {
                 conf =>
-                  if (conf.getBoolean("enabled").getOrElse(false)) {
+                  if (conf.getOptional[Boolean]("enabled").getOrElse(false)) {
                     fun(conf, registry)()
                   }
               }
           }
 
     if (enabled) {
-      val rateUnit = configuration.getString("org.zalando.markscheider.rateUnit", validUnits).getOrElse("SECONDS")
-      val durationUnit = configuration.getString("org.zalando.markscheider.durationUnit", validUnits).getOrElse("MILLISECONDS")
-      val showSamples = configuration.getBoolean("org.zalando.markscheider.showSamples").getOrElse(false)
+      val rateUnit = configuration.getOptional[String]("org.zalando.markscheider.rateUnit").filter(validUnits.contains).getOrElse("SECONDS")
+      val durationUnit = configuration.getOptional[String]("org.zalando.markscheider.durationUnit").filter(validUnits.contains).getOrElse("MILLISECONDS")
+      val showSamples = configuration.getOptional[Boolean]("org.zalando.markscheider.showSamples").getOrElse(false)
 
       setupJvmMetrics(registry)
       setupLogbackMetrics(registry)
-      setupReporting(configuration.getConfig("org.zalando.markscheider.reporting").getOrElse(Configuration.empty), registry)
+      setupReporting(configuration.getOptional[Configuration]("org.zalando.markscheider.reporting").getOrElse(Configuration.empty), registry)
 
       val module = new MetricsModule(rateUnit, durationUnit, showSamples)
       mapper.registerModule(module)
     }
   }
 
-  def enabled: Boolean = configuration.getBoolean("org.zalando.markscheider.enabled").getOrElse(true)
+  def enabled: Boolean = configuration.getOptional[Boolean]("org.zalando.markscheider.enabled").getOrElse(true)
 }
 
 class RegistryStopper @Inject() (configuration: Configuration) {
-  def stop(): Unit = SharedMetricRegistries.remove(configuration.getString("org.zalando.markscheider.name").getOrElse("default"))
+  def stop(): Unit = SharedMetricRegistries.remove(configuration.getOptional[String]("org.zalando.markscheider.name").getOrElse("default"))
 }
 
 class MetricRegistries @Inject() (configuration: Configuration) {
   def getOrCreate: MetricRegistry =
-    SharedMetricRegistries.getOrCreate(configuration.getString("org.zalando.markscheider.name").getOrElse("default"))
+    SharedMetricRegistries.getOrCreate(configuration.getOptional[String]("org.zalando.markscheider.name").getOrElse("default"))
 }
 
 class PlayMetricsModule extends Module {

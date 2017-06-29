@@ -9,9 +9,9 @@ import play.api.{ Configuration, Logger }
 object Reporter {
   def console(conf: Configuration, registry: MetricRegistry): () => Any = {
     for {
-      unit <- conf.getString("unit")
-      period <- conf.getInt("period")
-      prefix <- conf.getString("prefix")
+      unit <- conf.getOptional[String]("unit")
+      period <- conf.getOptional[Int]("period")
+      _ <- conf.getOptional[String]("prefix")
     } yield () => {
       Logger.info("Enabling ConsoleReporter")
 
@@ -24,10 +24,10 @@ object Reporter {
 
   def csv(conf: Configuration, registry: MetricRegistry): () => Any = {
     for {
-      outputDir <- conf.getString("output")
-      unit <- conf.getString("unit")
-      period <- conf.getInt("period")
-      prefix <- conf.getString("prefix")
+      outputDir <- conf.getOptional[String]("output")
+      unit <- conf.getOptional[String]("unit")
+      period <- conf.getOptional[Int]("period")
+      _ <- conf.getOptional[String]("prefix")
     } yield () => {
       Logger.info("Enabling CsvReporter")
 
