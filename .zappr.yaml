@@ -12,8 +12,7 @@ approvals:
       minimum: 1
       from:
         users:
-          - musiKk
-          - hardvain
+          - matterche
 
-X-Zalando-Team: "kohle"
+X-Zalando-Team: "goodbuy"
 X-Zalando-Type: code

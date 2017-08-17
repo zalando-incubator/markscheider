@@ -49,8 +49,8 @@ pomExtra := (<scm>
   </scm>
     <developers>
       <developer>
-        <name>Werner Hahn</name>
-        <email>werner.hahn@zalando-payments.com</email>
+        <name>Matthias Erche</name>
+        <email>matthias.erche@zalando.de</email>
         <url>https://github.com/zalando</url>
       </developer>
     </developers>)
