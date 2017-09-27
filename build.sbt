@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.13.5"
 ) map (_ % "test")
 
-maintainer := "team-kohle@zalando.de"
+maintainer := "Matthias Erche <matthias.erche@zalando.de>"
 licenses += ("Apache-2.0", url("https://opensource.org/licenses/Apache-2.0"))
 
 //pom extra info
@@ -51,7 +51,7 @@ pomExtra := (<scm>
       <developer>
         <name>Matthias Erche</name>
         <email>matthias.erche@zalando.de</email>
-        <url>https://github.com/zalando</url>
+        <url>https://github.com/zalando-incubator</url>
       </developer>
     </developers>)
 
