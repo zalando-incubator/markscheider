@@ -13,6 +13,7 @@ approvals:
       from:
         users:
           - matterche
+          - alexkops
 
 X-Zalando-Team: "goodbuy"
 X-Zalando-Type: code
