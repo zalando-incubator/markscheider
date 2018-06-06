@@ -50,13 +50,28 @@ class CallTimer @Inject() (registries: MetricRegistries, configuration: Configur
     val startTime = System.currentTimeMillis()
     call.failed.foreach { _ => //at least, now failures are being recorded somewhere.
       val duration = System.currentTimeMillis() - startTime
-      recordExternalNonHttpCall(requestId, duration.milliseconds, name, httpMethod, "FAILED")
+      recordFailedExternalHttpCall(requestId, duration.milliseconds, name, httpMethod)
     }
     call.map{ data =>
       val duration = System.currentTimeMillis() - startTime
       recordExternalHttpCall(requestId, duration.milliseconds, name, httpMethod, responseCodeFunction(data))
       data
     }
+  }
+
+  private def recordFailedExternalHttpCall(
+    requestId:  Option[Long],
+    duration:   Duration,
+    name:       String,
+    httpMethod: String
+  ): Unit = {
+    requestId.map { requestId =>
+      val externalRequestTimer = cache.get(requestId)
+      externalRequestTimer.getAndAdd(duration.toMillis)
+    }
+    registry
+      .timer(s"$externalHttpPrefix.FAILED.$httpMethod.$name")
+      .update(duration.toMillis, TimeUnit.MILLISECONDS)
   }
 
   /** Used to record an external http call that has been performed without using the Future that created it. May be useful if either your call is synchronous.*/
