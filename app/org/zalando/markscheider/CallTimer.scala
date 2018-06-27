@@ -59,7 +59,7 @@ class CallTimer @Inject() (registries: MetricRegistries, configuration: Configur
     }
   }
 
-  private def recordFailedExternalHttpCall(
+  def recordFailedExternalHttpCall(
     requestId:  Option[Long],
     duration:   Duration,
     name:       String,
