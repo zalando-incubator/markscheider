@@ -7,7 +7,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala, TutPlugin)
 scalaVersion := "2.12.2"
 crossScalaVersions := Seq("2.11.11", "2.12.2")
 
-val dropWizardMetricsVersion = "3.2.2"
+val dropWizardMetricsVersion = "4.0.0"
 
 libraryDependencies ++= Seq(
   "io.dropwizard.metrics" % "metrics-core" % dropWizardMetricsVersion,
@@ -15,15 +15,15 @@ libraryDependencies ++= Seq(
   "io.dropwizard.metrics" % "metrics-jvm" % dropWizardMetricsVersion,
   "io.dropwizard.metrics" % "metrics-logback" % dropWizardMetricsVersion,
   "com.google.code.findbugs" % "jsr305" % "3.0.2",
-  "com.google.guava" % "guava" % "22.0"
+  "com.google.guava" % "guava" % "25.1-jre"
 )
 
 libraryDependencies += guice
 
 //Test dependencies
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.3",
-  "org.scalacheck" %% "scalacheck" % "1.13.5"
+  "org.scalatest" %% "scalatest" % "3.0.5",
+  "org.scalacheck" %% "scalacheck" % "1.14.0"
 ) map (_ % "test")
 
 maintainer := "Matthias Erche <matthias.erche@zalando.de>"

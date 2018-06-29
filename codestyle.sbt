@@ -1,4 +1,3 @@
-import com.typesafe.sbt.SbtScalariform.ScalariformKeys
 import scalariform.formatter.preferences._
 
 // we should consider using '-Xfatal-warnings' to be very strict
@@ -17,19 +16,19 @@ scalastyleConfigUrl := Option(url("https://s3.eu-central-1.amazonaws.com/kohle-d
 scalastyleFailOnError := true
 
 // Create a default Scala style task to run with tests
-lazy val compileScalastyle = org.scalastyle.sbt.ScalastylePlugin.scalastyle.in(Compile).toTask("")
+lazy val compileScalastyle = taskKey[Unit]("testScalastyle")
+
+compileScalastyle := scalastyle.in(Compile).toTask("").value
+
 
 (compileInputs in(Compile, compile)) := ((compileInputs in(Compile, compile)) dependsOn compileScalastyle).value
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
-// configure scalariform to use preferred settings
-scalariformSettings
-
 //pls adjust your intellij settings accordingly
-ScalariformKeys.preferences := ScalariformKeys.preferences.value
+scalariformPreferences := scalariformPreferences.value
   .setPreference(AlignParameters, true)
-  .setPreference(DoubleIndentClassDeclaration, true)
+  .setPreference(DoubleIndentConstructorArguments, true)
   .setPreference(PlaceScaladocAsterisksBeneathSecondAsterisk, true)
   .setPreference(PreserveSpaceBeforeArguments, true)
   .setPreference(AlignSingleLineCaseStatements, true)
@@ -47,7 +46,7 @@ coverageMinimum := 50
 //do not warn in test cases when we use reflective calls - but do so in production!
 scalacOptions in Test += "-language:reflectiveCalls"
 
-scapegoatVersion := "1.3.1"
+scapegoatVersion in ThisBuild := "1.3.3"
 scapegoatDisabledInspections := Seq(
   "ObjectNames",
   "ClassNames"
