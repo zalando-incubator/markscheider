@@ -4,16 +4,16 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 import com.codahale.metrics.{ ConsoleReporter, CsvReporter, MetricRegistry }
-import play.api.{ Configuration, Logger }
+import play.api.{ Configuration, Logging }
 
-object Reporter {
+object Reporter extends Logging {
   def console(conf: Configuration, registry: MetricRegistry): () => Any = {
     for {
       unit <- conf.getOptional[String]("unit")
       period <- conf.getOptional[Int]("period")
       _ <- conf.getOptional[String]("prefix")
     } yield () => {
-      Logger.info("Enabling ConsoleReporter")
+      logger.info("Enabling ConsoleReporter")
 
       ConsoleReporter.forRegistry(registry)
         .convertDurationsTo(TimeUnit.MILLISECONDS)
@@ -29,7 +29,7 @@ object Reporter {
       period <- conf.getOptional[Int]("period")
       _ <- conf.getOptional[String]("prefix")
     } yield () => {
-      Logger.info("Enabling CsvReporter")
+      logger.info("Enabling CsvReporter")
 
       CsvReporter.forRegistry(registry)
         .convertDurationsTo(TimeUnit.MILLISECONDS)

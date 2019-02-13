@@ -4,18 +4,17 @@ name := "markscheider"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala, TutPlugin)
 
-scalaVersion := "2.12.2"
-crossScalaVersions := Seq("2.11.11", "2.12.2")
+scalaVersion := "2.12.8"
+crossScalaVersions := Seq("2.11.11", "2.12.8")
 
-val dropWizardMetricsVersion = "4.0.0"
+val dropWizardMetricsVersion = "4.0.5"
 
 libraryDependencies ++= Seq(
   "io.dropwizard.metrics" % "metrics-core" % dropWizardMetricsVersion,
   "io.dropwizard.metrics" % "metrics-json" % dropWizardMetricsVersion,
   "io.dropwizard.metrics" % "metrics-jvm" % dropWizardMetricsVersion,
   "io.dropwizard.metrics" % "metrics-logback" % dropWizardMetricsVersion,
-  "com.google.code.findbugs" % "jsr305" % "3.0.2",
-  "com.google.guava" % "guava" % "25.1-jre"
+  "com.google.code.findbugs" % "jsr305" % "3.0.2"
 )
 
 libraryDependencies += guice
