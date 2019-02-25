@@ -12,11 +12,11 @@ import play.api.routing.Router
 import scala.concurrent.ExecutionContext
 
 class MetricsFilter @Inject() (
-  registries:    MetricRegistries,
-  callTimer:     CallTimer,
-  configuration: Configuration
+    registries:    MetricRegistries,
+    callTimer:     CallTimer,
+    configuration: Configuration
 )(implicit ec: ExecutionContext)
-    extends EssentialFilter {
+  extends EssentialFilter {
 
   val registry = registries.getOrCreate
   val prefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.http").getOrElse("zmon.response")
