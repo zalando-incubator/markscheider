@@ -21,6 +21,7 @@ class MetricsFilter @Inject() (
   val registry = registries.getOrCreate
   val prefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.http").getOrElse("zmon.response")
   val selfPrefix = configuration.getOptional[String]("org.zalando.markscheider.prefix.self-http").getOrElse("zmon.self.response")
+  val recordExternalCallTimes = configuration.getOptional[Boolean]("org.zalando.markscheider.recordExternalCallTimes").getOrElse(true)
 
   def requestsTimer: Timer = registry.timer(name(classOf[MetricsFilter], "requestTimer"))
   def activeRequests: Counter = registry.counter(name(classOf[MetricsFilter], "activeRequests"))
@@ -46,15 +47,18 @@ class MetricsFilter @Inject() (
           registry.timer(s"$prefix.${result.header.status / 100}xx.ALL.ALL")
             .update(duration, TimeUnit.MILLISECONDS)
 
-          val externalCallTimes = callTimer.readExternalCallTimes(rh.id).toMillis
-          registry.timer(s"$selfPrefix.${result.header.status}.${rh.method}.$controller.$method")
-            .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
-          registry.timer(s"$selfPrefix.${result.header.status / 100}xx.${rh.method}.$controller.$method")
-            .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
-          registry.timer(s"$selfPrefix.${result.header.status / 100}xx.${rh.method}.ALL")
-            .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
-          registry.timer(s"$selfPrefix.${result.header.status / 100}xx.ALL.ALL")
-            .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
+          if (recordExternalCallTimes) {
+            val externalCallTimes = callTimer.readExternalCallTimes(rh.id).toMillis
+            registry.timer(s"$selfPrefix.${result.header.status}.${rh.method}.$controller.$method")
+              .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
+            registry.timer(s"$selfPrefix.${result.header.status / 100}xx.${rh.method}.$controller.$method")
+              .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
+            registry.timer(s"$selfPrefix.${result.header.status / 100}xx.${rh.method}.ALL")
+              .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
+            registry.timer(s"$selfPrefix.${result.header.status / 100}xx.ALL.ALL")
+              .update(duration - externalCallTimes, TimeUnit.MILLISECONDS)
+          }
+
           activeRequests.dec()
           globalCtx.stop()
           result

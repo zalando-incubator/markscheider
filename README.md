@@ -17,7 +17,7 @@ Add metrics-play dependency in your `build.sbt`:
 
 ```scala
 libraryDependencies += Seq(
-  "org.zalando" %% "markscheider" % "2.5.2"
+  "org.zalando" %% "markscheider" % "2.7.0"
 )
 ```
 
@@ -25,18 +25,9 @@ To enable the plugin, add to `conf/application.conf`:
 
      play.modules.enabled += "org.zalando.markscheider.PlayMetricsModule"
 
-Then add a class `Filters` as described in [The Play docs](https://www.playframework.com/documentation/2.5.x/ScalaHttpFilters) to
-include the filter in your filter chain.
+Then add the metrics filter to your filter chain in `conf/application.conf`:
 
-```scala
-import javax.inject.Inject
-import play.api.http.DefaultHttpFilters
-import org.zalando.markscheider.MetricsFilter
-
-class Filters @Inject() (
-  metricsFilter: MetricsFilter
-) extends DefaultHttpFilters(metricsFilter)
-```
+     play.filters.enabled += "org.zalando.markscheider.MetricsFilter"
 
 You may want to have an endpoint that delivers the metrics, which you can add via
 
@@ -44,7 +35,9 @@ You may want to have an endpoint that delivers the metrics, which you can add vi
 
 in your `routes` file.
 
-The metrics are created in a way that is compatible with [ZMON](https://github.com/zalando/zmon).
+The metrics are created in a way that is compatible with [ZMON](https://github.com/zalando/zmon) by default.
+You can get [Prometheus](https://prometheus.io/)-compatible metrics as well by explicitly asking for `text/plain`
+via the `Accept` header or configuring `org.zalando.markscheider.defaultFormat = "prometheus"`
 
 After that, you can get metrics information in your service at `/metrics`. By default, that endpoint is unsecured (no authentication in place).
 For an example output of the endpoint, see `example-output.json`.

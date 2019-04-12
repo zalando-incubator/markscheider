@@ -1,3 +1,4 @@
+import com.typesafe.sbt.SbtScalariform.ScalariformKeys
 import scalariform.formatter.preferences._
 
 // we should consider using '-Xfatal-warnings' to be very strict
@@ -46,7 +47,7 @@ coverageMinimum := 50
 //do not warn in test cases when we use reflective calls - but do so in production!
 scalacOptions in Test += "-language:reflectiveCalls"
 
-scapegoatVersion in ThisBuild := "1.3.3"
+scapegoatVersion in ThisBuild  := "1.3.8"
 scapegoatDisabledInspections := Seq(
   "ObjectNames",
   "ClassNames"
