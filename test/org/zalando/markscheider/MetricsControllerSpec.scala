@@ -2,7 +2,7 @@ package org.zalando.markscheider
 
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
-import play.api.http.{HeaderNames, MimeTypes, Status}
+import play.api.http.{ HeaderNames, MimeTypes, Status }
 import play.api.mvc.ControllerComponents
 import play.api.test.FakeRequest
 

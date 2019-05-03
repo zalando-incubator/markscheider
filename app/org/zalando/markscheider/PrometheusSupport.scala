@@ -23,32 +23,39 @@ trait PrometheusSupport {
       }
     }
   }
-  case class PrometheusMetric(name: String, value: Double, labels: Map[String, String] = Map.empty, timestamp: LocalDateTime = LocalDateTime.now) {
+  case class PrometheusMetric(
+      name:      String,
+      value:     Double,
+      labels:    Map[String, String]   = Map.empty,
+      timestamp: Option[LocalDateTime] = Option(LocalDateTime.now)
+  ) {
     require(!name.contains(" "))
     require(!labels.keys.exists(_.contains(" ")))
 
-    private def labelsToString(labels: Map[String, String]) = labels.map{ case (key, value) => s"$key=$value" }.mkString(",")
+    lazy val timestampAsString: String = timestamp.map(stamp => s"${stamp.toEpochSecond(ZoneOffset.UTC)}${stamp.getNano}").getOrElse("")
+    private def labelsToString(labels: Map[String, String]) = labels.map{ case (key, value) => s"""$key="$value"""" }.mkString(",")
     override def toString: String =
-      s"$name{${labelsToString(labels)}} $value ${timestamp.toEpochSecond(ZoneOffset.UTC)}${timestamp.getNano}\n"
+      s"$name{${labelsToString(labels)}} $value $timestampAsString\n".trim()
   }
   object PrometheusMetric {
-    def fromSnapshot(name: String, labels: Map[String, String], snapshot: Snapshot, now: LocalDateTime = LocalDateTime.now): Seq[PrometheusMetric] = {
+    def fromSnapshot(name: String, labels: Map[String, String], snapshot: Snapshot): Seq[PrometheusMetric] = {
       Seq(
-        PrometheusMetric(name + "_median", snapshot.getMedian, labels, now),
-        PrometheusMetric(name + "_mean", snapshot.getMean, labels, now),
-        PrometheusMetric(name + "_stddev", snapshot.getStdDev, labels, now),
-        PrometheusMetric(name + "_max", snapshot.getMax, labels, now),
-        PrometheusMetric(name + "_min", snapshot.getMin, labels, now),
-        PrometheusMetric(name + "_p75", snapshot.get75thPercentile(), labels, now),
-        PrometheusMetric(name + "_p95", snapshot.get95thPercentile(), labels, now),
-        PrometheusMetric(name + "_p98", snapshot.get98thPercentile(), labels, now),
-        PrometheusMetric(name + "_p99", snapshot.get99thPercentile(), labels, now),
-        PrometheusMetric(name + "_p999", snapshot.get999thPercentile(), labels, now)
+        PrometheusMetric(name + "_mean", snapshot.getMean, labels, None),
+        PrometheusMetric(name + "_stddev", snapshot.getStdDev, labels, None),
+        PrometheusMetric(name + "_max", snapshot.getMax, labels, None),
+        PrometheusMetric(name + "_min", snapshot.getMin, labels, None),
+        PrometheusMetric(name + "_bucket", snapshot.getMedian, labels + ("le" -> "0.5"), None),
+        PrometheusMetric(name + "_bucket", snapshot.get75thPercentile(), labels + ("le" -> "0.75"), None),
+        PrometheusMetric(name + "_bucket", snapshot.get95thPercentile(), labels + ("le" -> "0.95"), None),
+        PrometheusMetric(name + "_bucket", snapshot.get98thPercentile(), labels + ("le" -> "0.98"), None),
+        PrometheusMetric(name + "_bucket", snapshot.get99thPercentile(), labels + ("le" -> "0.99"), None),
+        PrometheusMetric(name + "_bucket", snapshot.get999thPercentile(), labels + ("le" -> "0.999"), None),
+        PrometheusMetric(name + "_count", snapshot.size(), labels, None)
       )
     }
 
     def fromTimer(name: String, labels: Map[String, String], timer: Timer): Seq[PrometheusMetric] = {
-      val now = LocalDateTime.now
+      val now = Option(LocalDateTime.now)
       PrometheusMetric.fromSnapshot(name, labels, timer.getSnapshot) ++ Seq(
         PrometheusMetric(name + "_meanrate", timer.getMeanRate, labels, now),
         PrometheusMetric(name + "_1mrate", timer.getOneMinuteRate, labels, now),
