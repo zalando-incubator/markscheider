@@ -17,7 +17,7 @@ Add metrics-play dependency in your `build.sbt`:
 
 ```scala
 libraryDependencies += Seq(
-  "org.zalando" %% "markscheider" % "2.7.0"
+  "org.zalando" %% "markscheider" % "2.7.1"
 )
 ```
 

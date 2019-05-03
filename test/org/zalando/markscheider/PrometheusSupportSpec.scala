@@ -1,10 +1,10 @@
 package org.zalando.markscheider
 
-import com.codahale.metrics.{ ExponentiallyDecayingReservoir, Histogram, Reservoir }
+import com.codahale.metrics.{ExponentiallyDecayingReservoir, Histogram}
 
 class PrometheusSupportSpec extends UnitSpec {
   "The serializer regex" should "match some of the basic strings given" in {
-    import PrometheusSupport.{ DefaultMetricName => regex }
+    import PrometheusSupport.{DefaultMetricName => regex}
     assert(regex.findFirstMatchIn("zmon.self.response.2xx.GET.org.zalando.markscheider.MetricsController.metrics").isDefined)
     "zmon.self.response.2xx.GET.org.zalando.markscheider.MetricsController.metrics" match {
       case regex(prefix, responseCode, httpMethod, method) =>

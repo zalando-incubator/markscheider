@@ -19,7 +19,7 @@ class MetricsController @Inject() (
   extends AbstractController(cc) with PrometheusSupport {
   private def defaultFormat: String = configuration.getAndValidate[String]("org.zalando.markscheider.defaultFormat", Set("zmon", "prometheus"))
 
-  def serializePrometheus(registry: MetricRegistry): Result = {
+  private def serializePrometheus(registry: MetricRegistry): Result = {
     val histograms = (for {
       (metricsName, histogram) <- registry.getHistograms.asScala
       extractedName <- ExtractedName.fromMetricsName(metricsName)
@@ -45,7 +45,7 @@ class MetricsController @Inject() (
     Ok(stringWriter.toString).withHeaders(HeaderNames.CACHE_CONTROL -> "must-revalidate,no-cache,no-store").as("text/plain; version=0.0.4")
   }
 
-  def serializeJson(mapper: ObjectMapper): Result = {
+  private def serializeJson(mapper: ObjectMapper): Result = {
     val writer: ObjectWriter = mapper.writerWithDefaultPrettyPrinter()
     val stringWriter = new StringWriter()
     writer.writeValue(stringWriter, plugin.registry)
