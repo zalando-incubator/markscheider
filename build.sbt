@@ -2,10 +2,10 @@ organization := "org.zalando"
 
 name := "markscheider"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala, TutPlugin)
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.12.8"
-crossScalaVersions := Seq("2.11.11", "2.12.8")
+crossScalaVersions := Seq("2.11.12", "2.12.8")
 
 val dropWizardMetricsVersion = "4.0.5"
 
@@ -13,8 +13,7 @@ libraryDependencies ++= Seq(
   "io.dropwizard.metrics" % "metrics-core" % dropWizardMetricsVersion,
   "io.dropwizard.metrics" % "metrics-json" % dropWizardMetricsVersion,
   "io.dropwizard.metrics" % "metrics-jvm" % dropWizardMetricsVersion,
-  "io.dropwizard.metrics" % "metrics-logback" % dropWizardMetricsVersion,
-  "com.google.code.findbugs" % "jsr305" % "3.0.2"
+  "io.dropwizard.metrics" % "metrics-logback" % dropWizardMetricsVersion
 )
 
 libraryDependencies += guice
@@ -22,7 +21,8 @@ libraryDependencies += guice
 //Test dependencies
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.5",
-  "org.scalacheck" %% "scalacheck" % "1.14.0"
+  "org.scalacheck" %% "scalacheck" % "1.14.0",
+  "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.0"
 ) map (_ % "test")
 
 maintainer := "Matthias Erche <matthias.erche@zalando.de>"
@@ -55,7 +55,3 @@ pomExtra := (<scm>
     </developers>)
 
 homepage := Some(url("https://github.com/zalando-incubator/markscheider"))
-
-//settings to compile readme
-tutSourceDirectory := baseDirectory.value / "tut"
-tutTargetDirectory := baseDirectory.value
